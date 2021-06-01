@@ -6,11 +6,13 @@ typedef struct node {
     struct node *next;
 };
 
-struct node* insert_beginning(struct node *head, int item);
+struct node *insert_beginning(struct node *head, int item);
 
-struct node* insert_end(struct node *head, int item);
+struct node *insert_end(struct node *head, int item);
 
 int numberOfListElements(struct node *head);
+
+void displayElementsList(struct node *head);
 
 int main() {
 
@@ -22,10 +24,13 @@ int main() {
 
     printf("Linked list Menu!\n");
     while (k != 0) {
-        printf("Option 0: Enter '0' to exit the menu and the app:\n");
-        printf("Option 1: Enter '1' to insert a node at the beginning:\n");
-        printf("Option 2: Enter '2' to insert a node at the end:\n");
-        printf("Option 3: Enter '3' to get the number of nodes in the list:\n");
+        printf("_____________________MENU_______________________");
+        printf("\nOption 0: Enter '0' to exit the menu and the app.\n");
+        printf("Option 1: Enter '1' to insert a node at the beginning.\n");
+        printf("Option 2: Enter '2' to insert a node at the end.\n");
+        printf("Option 3: Enter '3' to get the number of nodes in the list.\n");
+        printf("Option 4: Enter '4' to print the elements of nodes in the list.\n");
+        printf("________________________________________________\n");
         scanf("%d", &k);
 
 
@@ -35,18 +40,21 @@ int main() {
             case 1:
                 printf("Enter the value of the INFO:\n");
                 scanf("%d", &element);
-                head= insert_beginning(head, element);
+                head = insert_beginning(head, element);
                 break;
             case 2:
                 printf("Enter the value of the INFO:\n");
                 scanf("%d", &element);
-                head=insert_end(head, element);
+                head = insert_end(head, element);
                 break;
             case 3:
                 printf("The number of the elements in the list: %d\n", numberOfListElements(head));
                 break;
+            case 4:
+                displayElementsList(head);
+                break;
             default:
-                printf("Invalid entry: please enter a value from the menu list>\n");
+                printf("Invalid entry: please enter a value from the menu list.\n");
 
         }
     }
@@ -55,7 +63,7 @@ int main() {
 
 // Pre-
 // post
-struct node* insert_beginning(struct node *head, int item) {
+struct node *insert_beginning(struct node *head, int item) {
     struct node *temp;
     temp = (struct node *) malloc(sizeof(struct node));
     temp->info = item;
@@ -70,7 +78,7 @@ struct node* insert_beginning(struct node *head, int item) {
 
 }
 
-struct node* insert_end(struct node *head, int item) {
+struct node *insert_end(struct node *head, int item) {
     struct node *n;
     struct node *temp;
 
@@ -98,11 +106,29 @@ int numberOfListElements(struct node *head) {
     if (temp == NULL) {
         return 0;
     } else {
-        while(temp!=NULL){
-            temp= temp->next;
+        while (temp != NULL) {
+            temp = temp->next;
             k++;
         }
         return k;
     }
 
+}
+
+void displayElementsList(struct node *head) {
+    int k;
+
+    struct node *temp;
+    temp = head;
+
+    if (temp == NULL) {
+        printf("Empty list.\n");
+    } else {
+        while (temp != NULL) {
+            printf("The element %d has a value of: %d\n", k, temp->info);
+
+            temp = temp->next;
+            k++;
+        }
+    }
 }
